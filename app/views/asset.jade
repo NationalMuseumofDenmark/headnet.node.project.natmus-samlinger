@@ -14,7 +14,7 @@ block content
   article(itemscope, itemtype='http://schema.org/CreativeWork', class='asset')
     - var title = item.short_title || 'Ingen titel'
     .row
-      .col-md-6.pull-right.text-row
+      .col-md-6.col-xs-12.pull-right.text-row
         p.catalog
           a(href='/#{catalog.alias}') Fra samlingen #{catalog.name}
 
@@ -135,11 +135,17 @@ block content
                   th Filnavn:
                   td= item.filename || '-'
                 tr
-                  th Arkivalienr.:
+                  th Filstørrelse:
+                  td= item.file_size ? item.file_size.displaystring : '-'
+                tr
+                  th Arkivalie nr.:
                   td= item.archiveno || '-'
                 tr
-                  th Genstandsnr.:
-                  td= item.unitno || '-'
+                  th Genstands nr.:
+                  td= item.object_number || '-'
+                tr
+                  th Inventar nr.:
+                  td= item.inventory_number || '-'
                 tr
                   th Arkivnavn:
                   td= item.archivename ? item.archivename.displaystring : '-'
@@ -151,7 +157,7 @@ block content
                   th Topnr.:
                   td= item.topno || '-'
       
-      .col-md-6.image-row
+      .col-md-6.col-xs-12.image-row
           - var filename = item.filename.toLowerCase();
           - if(player === "image-single")
             .bleed.asset-image
@@ -163,8 +169,10 @@ block content
              audio(controls)
                source(src=sources.audio)
           - else if(player === "video")
-             video(width="100%", controls)
-               source(src=sources.video, type="video/mp4")
+            video(width="100%", controls)
+              source(src=sources.video, type="video/mp4")
+
+
 
           .asset-tools
             .btn-group.dropup
